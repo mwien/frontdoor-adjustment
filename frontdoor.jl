@@ -28,32 +28,32 @@ function modbb(G, X, v, edgetype, visited, continuelater, forbidden)
   end
 end
 
-function finda(G, X, C)
+function findi(G, X, C)
   H = copy(G)
   removeout!(H, X)
   reachable = reach(H, X, Set{Integer}())
   return setdiff(C, reachable)
 end
 
-function findab(G, X, Y, Za)
+function findii(G, X, Y, Zi)
   visited = falses(2*nv(G) + 1)
   continuelater = falses(nv(G))
-  forbidden = setdiff(Set{Integer}(vertices(G)), Za)
+  forbidden = setdiff(Set{Integer}(vertices(G)), Zi)
   for y in Y
     for edgetype in [0,1]
       modbb(G, X, y, edgetype, visited, continuelater, forbidden)
     end
   end
 
-  return setdiff(Za, forbidden)
+  return setdiff(Zi, forbidden)
 end
 
 function findfrontdoor(G, X, Y, I, R)
   C = intersect(setdiff(Set(vertices(G)), union(X, Y)), R)
-  Za = finda(G, X, C)
-  Zab = findab(G, X, Y, Za)
-  if issubset(I, Zab) && checkfirst(G, X, Y, Zab)
-    return Zab
+  Zi = findi(G, X, C)
+  Zii = findii(G, X, Y, Zi)
+  if issubset(I, Zii) && checkfirst(G, X, Y, Zii)
+    return Zii
   else
     return false
   end
