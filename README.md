@@ -1,14 +1,33 @@
-# Efficient algorithms for Front-Door Adjustment
-  The files ```run_instances.jl``` contains a function ```testinstances(type)```, which for ```type = "find"``` outputs for each instance a frontdoor-adjustment set if it exists and for ```type = "enumerate"``` returns a set of all frontdoor-adjustment sets.
+# Linear-Time Algorithms for Front-Door Adjustment in Causal Graphs
 
-  Hence, e.g., to run the algorithm for finding front-door adjustment sets, do 
-  ```julia
-  include("run_instances.jl")
-  testinstances("find")
-  ```
-  in the Julia REPL.  
+This repository is the official implementation of [Linear-Time Algorithms for Front-Door Adjustment in Causal Graphs](https://arxiv.org/abs/2211.16468). This directory contains the code to replicate the experimental results discussed in the paper.
 
+As we compare algorithms in Julia, Python (ours and the ones given by Jeong et al.) and JavaScript, quite a few things have to be set up. This directory, however, should contain everything necessary except for:
+- A Julia installation with dependencies specified below.
+- A Python 3 installation with dependencies specified below.
+- A Node.js and npm installation with dependencies specified below.
 
-  Internally, the functions ```findfrontdoor``` and ```enumeratefrontdoor``` in file frontdoor.jl are called, which are implementations of the algorithms presented in the paper: Finding Front-Door Adjustment Sets in Linear Time; Marcel Wienöbst, Benito van der Zander, Maciej Liskiewicz (available on arXiv under https://arxiv.org/abs/2211.16468). The time complexity of ```findfrontdoor``` is $O(n+m)$ and ```enumeratefrontdoor``` has delay $O(n(n+m))$. 
+Installation of the dependencies:
+- Run ```pip install -r requirements_py.txt``` and ```julia requirements.jl``` in this directory. 
+- Run ```cat requirements_js.txt | xargs npm install``` in ```external/dagitty/jslib``` (our JavaScript implementation needs Dagitty to run, of which we provide a fork under ```external/dagitty```; see https://github.com/jtextor/dagitty for the original dagitty package).
+- Run ```pip install -r requirements_py.txt``` in ```external/FrontdoorAdjustmentSets/``` (this contains the code by Jeong et al., slightly modified to integrate with our experiments; see the original package here: https://github.com/CausalAILab/FrontdoorAdjustmentSets).
 
-  The instances should be specified as follows: The first line contains the number of variables $n$ and edges $m$. The second line contains the vertices (separated by spaces) in X, the third the ones in Y, the fourth those in I and the fifth those in R. Then follow $m$ lines containing two variables $A$ and $B$ indicating the edge $A \rightarrow B$. It is assumed that the variables/vertices are numbered from $1$ to $n$ and that the graph is acyclic.
+The Julia file ```time_experiments.jl``` starts the run time comparison of the various algorithms (it can be called via command line by ```julia time_experiments.jl```). The results are written to ```results/timeresults.ans``` and ```results/timefullresults.ans```. Running the full experiments takes a few days. 
+
+In case there are errors it may help to check for each of the programs separately if it runs correctly. Below is a short description, how to do that for each by calling the given command from this directory:
+
+- findpy: ```python3 frontdoor.py instances/1.in```
+- minpy: ```python3 minimal.py instances/1.in```
+- jtbpy: ```python3 external/FrontdoorAdjustmentSets/main.py find external/FrontdoorAdjustmentSets/graphs/fig1a.txt```
+- findjs: ```node external/dagitty/jslib/dagitty-node.js instances/1.in```
+- minjs: ```node external/dagitty/jslib/dagitty-node-min.js instances/1.in```
+- findjl: ```julia exec_run.jl frontdoor findjl instances/1.in```
+- minjl: ```julia exec_run.jl frontdoor minjl instances/1.in```
+
+In case you are not able to run one of the programs, you can remove them from the algorithms list (line 4 of ```time_experiments.jl```), so that only at least the other programs/methods are executed. 
+
+The experiments concerning the size of the maximal/minimal FD set and the ratio of identified instances can be started by running ```julia ratio_experiments.jl``` and should need no further setup. The results are written to ```results/ratioresults.ans```.
+
+The plots of all experimental results and the raw experimental data (in text files) are provided under ```results/plotsandresults/```.
+
+The results of your runs will be stored in ```results/```.

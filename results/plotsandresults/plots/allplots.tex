@@ -1,0 +1,1174 @@
+\documentclass[varwidth=50cm,margin=0.5cm]{standalone}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, graphs}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% some matching colors
+\definecolor{ba.yellow}{RGB}{252,190,18}
+\definecolor{ba.gray}{RGB}{153,153,156}
+\definecolor{ba.blue}{RGB}{6,123,164}
+\definecolor{ba.red}{RGB}{213,96,98}
+\definecolor{ba.orange}{RGB}{233,116,81}
+\definecolor{ba.pine}{RGB}{67,154,134}
+\definecolor{ba.green}{RGB}{196,247,161}
+\definecolor{ba.violet}{RGB}{88, 53, 94}
+\pgfplotscreateplotcyclelist{mycolorlist}{%
+  ba.blue\\
+  ba.yellow\\
+  ba.pine\\
+  ba.green\\
+  ba.red\\
+  ba.violet\\
+}
+\pgfplotsset{
+    nice/.style = {
+        %minor x tick num=1,
+        xtick pos=left,
+        ytick pos=left,
+        enlarge x limits=false,
+        every x tick/.style={color=black, thin},
+        %every y tick/.style={color=black, thin},
+        xtick align=outside,
+        xlabel near ticks,
+        %ylabel near ticks,
+        axis on top,        
+    }
+}
+\pgfplotsset{every error bar/.append style={line  width=0.8pt}}
+
+\begin{document}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      style = {line width=1.1pt},
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|,|\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/findpylr3.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/minpylr3.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/jtbpylr3.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|,|\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      style = {line width=1.1pt},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/findpysr3.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/minpysr3.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/jtbpysr3.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      style = {line width=1.1pt},
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}| = |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/findpylr3.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/minpylr3.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/jtbpylr3.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}| = |\mathbf{Y}| = \log_2(n)-3$},
+      style = {line width=1.1pt},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/findpysr3.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/minpysr3.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/jtbpysr3.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}
+
+  
+
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      style = {line width=1.1pt},
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|,|\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/findpylr5.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/minpylr5.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/jtbpylr5.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|,|\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      style = {line width=1.1pt},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/findpysr5.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/minpysr5.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/jtbpysr5.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      style = {line width=1.1pt},
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}| = |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/findpylr5.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/minpylr5.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/jtbpylr5.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}| = |\mathbf{Y}| = \log_2(n)-3$},
+      style = {line width=1.1pt},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/findpysr5.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/minpysr5.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/jtbpysr5.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}
+
+  
+
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      style = {line width=1.1pt},
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|,|\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/findpylr10.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/minpylr10.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/jtbpylr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|,|\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      style = {line width=1.1pt},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/findpysr10.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/minpysr10.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../randxy/jtbpysr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      style = {line width=1.1pt},
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}| = |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/findpylr10.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/minpylr10.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/jtbpylr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 9cm,
+      nice,
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}| = |\mathbf{Y}| = \log_2(n)-3$},
+      style = {line width=1.1pt},
+      log basis x={2}, 
+      log basis y={10},
+      legend entries={\textsc{find}, \textsc{min}, \textsc{jtb}},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      ]
+    \addplot [color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/findpysr10.ans"};
+    \addplot [color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/minpysr10.ans"};
+    \addplot [color=ba.orange]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{../lognxy/jtbpysr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}
+
+  
+
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findpylr3.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minpylr3.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjllr3.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjllr3.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjslr3.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjslr3.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findpysr3.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minpysr3.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjlsr3.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjlsr3.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjssr3.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjssr3.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findpylr3.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minpylr3.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjllr3.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjllr3.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjslr3.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjslr3.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n) - 3$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findpysr3.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minpysr3.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjlsr3.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjlsr3.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjssr3.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjssr3.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}
+
+  
+
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findpylr5.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minpylr5.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjllr5.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjllr5.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjslr5.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjslr5.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findpysr5.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minpysr5.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjlsr5.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjlsr5.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjssr5.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjssr5.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findpylr5.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minpylr5.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjllr5.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjllr5.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjslr5.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjslr5.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n) - 3$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findpysr5.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minpysr5.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjlsr5.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjlsr5.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjssr5.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjssr5.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}
+
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findpylr10.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minpylr10.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjllr10.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjllr10.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjslr10.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjslr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findpysr10.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minpysr10.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjlsr10.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjlsr10.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/findjssr10.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../randxy/minjssr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}| = 0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findpylr10.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minpylr10.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjllr10.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjllr10.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjslr10.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjslr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture} \hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      width = 8.9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Time in $s$},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}| = 0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n) - 3$},
+      log basis x={2}, 
+      log basis y ={10},
+      legend entries = {\textsc{findpy}, \textsc{minpy},
+        \textsc{findjl}, \textsc{minjl}, \textsc{findjs},
+      \textsc{minjs}},
+      legend style = {at={(0,1)}, anchor = {north west}},
+      ]
+    \addplot %[color=ba.blue]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findpysr10.ans"};
+    \addplot %[color=ba.yellow]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minpysr10.ans"};
+    \addplot %[color=ba.pine]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjlsr10.ans"};
+    \addplot %[color=ba.green]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjlsr10.ans"};
+    \addplot %[color=ba.red]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/findjssr10.ans"};
+    \addplot %[color=ba.violet]
+    plot [error bars/.cd, y dir = both, y explicit]
+    table[y error index=2]{"../lognxy/minjssr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}
+
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      nice,
+      width=8.85cm,
+      style = {line width=1.1pt},
+      title = {Maximal FD set; $|\mathbf{X}|,|\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      xlabel={Number of Variables},
+      ylabel={Size},
+      cycle list name = mycolorlist,
+      log basis x={2}, 
+      log basis y={2},
+      legend entries = {$|\mathbf{R}|=0.25n$; $|\mathbf{E}| = 1.5n$,
+        $|\mathbf{R}|=0.25n$; $|\mathbf{E}| = 2.5n$,
+        $|\mathbf{R}|=0.25n$; $|\mathbf{E}|=5n$, $|\mathbf{R}| = 0.5n$;
+        $|\mathbf{E}|=1.5n$, $|\mathbf{R}|=0.5n$; $|\mathbf{E}|=2.5n$,
+      $|\mathbf{R}| = 0.5n$; $|\mathbf{E}| = 5n$}, 
+      legend cell align = {left},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      %legend entries = {$|R|=0.25$; $|E| = 1.5n$, $|R|=0.25$; $|E| = 2.5n$,
+        %$|R|=0.25$; $|E|=5n$, $|R| = 0.5n$; $|E|=1.5n$, $|R|=0.5n$; $|E|=2.5n$,
+      %$|R| = 0.5n$; $|E| = 5n$}, 
+      %legend cell align = {left},
+      %legend style = {at={(0.5,-0.15)}, anchor = {north}},
+      ]
+    \addplot %[color=blue]
+    table {"../randxy/maxsr3.ans"};
+    \addplot %[color=green]
+    table {"../randxy/maxsr5.ans"};
+    \addplot %[color=yellow]
+    table {"../randxy/maxsr10.ans"};
+    \addplot %[color=orange]
+    table {"../randxy/maxlr3.ans"};
+    \addplot %[color=red]
+    table {"../randxy/maxlr5.ans"};
+    \addplot %[color=purple]
+    table {"../randxy/maxlr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace*{0.75cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{loglogaxis}[
+      nice,
+      width=8.85cm,
+      style = {line width=1.1pt},
+      title = {Maximal FD set; $|\mathbf{X}|,|\mathbf{Y}| =
+      \log_2(n)-3$},
+      xlabel={Number of Variables},
+      ylabel={Size},
+      cycle list name = mycolorlist,
+      log basis x={2}, 
+      log basis y={2},
+      %legend entries = {$|R|=0.25$; $|E| = 1.5n$, $|R|=0.25$; $|E| = 2.5n$,
+        %$|R|=0.25$; $|E|=5n$, $|R| = 0.5n$; $|E|=1.5n$, $|R|=0.5n$; $|E|=2.5n$,
+      %$|R| = 0.5n$; $|E| = 5n$}, 
+      %legend cell align = {left},
+      %legend style = {at={(0.5,-0.15)}, anchor = {north}},
+      ]
+    \addplot %[color=blue]
+    table {"../lognxy/maxsr3.ans"};
+    \addplot %[color=green]
+    table {"../lognxy/maxsr5.ans"};
+    \addplot %[color=yellow]
+    table {"../lognxy/maxsr10.ans"};
+    \addplot %[color=orange]
+    table {"../lognxy/maxlr3.ans"};
+    \addplot %[color=red]
+    table {"../lognxy/maxlr5.ans"};
+    \addplot %[color=purple]
+    table {"../lognxy/maxlr10.ans"};
+    \end{loglogaxis}
+  \end{tikzpicture}\hspace{0.5cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      nice,
+      width=8.85cm,
+      style = {line width=1.1pt},
+      cycle list name = mycolorlist,
+      title = {Minimal FD set; $|\mathbf{X}|,|\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      xlabel={Number of Variables},
+      ylabel={Size},
+      log basis x={2}, 
+      legend entries = {$|\mathbf{R}|=0.25n$; $|\mathbf{E}| = 1.5n$,
+        $|\mathbf{R}|=0.25n$; $|\mathbf{E}| = 2.5n$,
+        $|\mathbf{R}|=0.25n$; $|\mathbf{E}|=5n$, $|\mathbf{R}| = 0.5n$;
+        $|\mathbf{E}|=1.5n$, $|\mathbf{R}|=0.5n$; $|\mathbf{E}|=2.5n$,
+      $|\mathbf{R}| = 0.5n$; $|\mathbf{E}| = 5n$}, 
+      legend cell align = {left},
+      legend style = {at={(0.5,1)}, anchor = {north}},
+      ]
+    \addplot %[color=blue]
+    table {"../randxy/minsr3.ans"};
+    \addplot %[color=green]
+    table {"../randxy/minsr5.ans"};
+    \addplot %[color=yellow]
+    table {"../randxy/minsr10.ans"};
+    \addplot %[color=orange]
+    table {"../randxy/minlr3.ans"};
+    \addplot %[color=red]
+    table {"../randxy/minlr5.ans"};
+    \addplot %[color=purple]
+    table {"../randxy/minlr10.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture} \hspace{0.15cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      nice,
+      width=8.85cm,
+      style = {line width=1.1pt},
+      cycle list name = mycolorlist,
+      title = {Minimal FD set; $|\mathbf{X}|,|\mathbf{Y}| =
+      \log_2(n)-3$},
+      xlabel={Number of Variables},
+      ylabel={Size},
+      log basis x={2}, 
+      ]
+    \addplot %[color=blue]
+    table {"../lognxy/minsr3.ans"};
+    \addplot %[color=green]
+    table {"../lognxy/minsr5.ans"};
+    \addplot %[color=yellow]
+    table {"../lognxy/minsr10.ans"};
+    \addplot %[color=orange]
+    table {"../lognxy/minlr3.ans"};
+    \addplot %[color=red]
+    table {"../lognxy/minlr5.ans"};
+    \addplot %[color=purple]
+    table {"../lognxy/minlr10.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}
+
+  
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}|=0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../randxy/fdratiolr3.ans"};
+    \addplot table {"../randxy/bdratiolr3.ans"};
+    \addplot table {"../randxy/naiveratiolr3.ans"};
+    \addplot table {"../randxy/bdplusratiolr3.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}\hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}|=0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../randxy/fdratiosr3.ans"};
+    \addplot table {"../randxy/bdratiosr3.ans"};
+    \addplot table {"../randxy/naiveratiosr3.ans"};
+    \addplot table {"../randxy/bdplusratiosr3.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}\hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}|=0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n) - 3$},
+      cycle list name = mycolorlist,
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../lognxy/fdratiolr3.ans"};
+    \addplot table {"../lognxy/bdratiolr3.ans"};
+    \addplot table {"../lognxy/naiveratiolr3.ans"};
+    \addplot table {"../lognxy/bdplusratiolr3.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture} \hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}|=0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../lognxy/fdratiosr3.ans"};
+    \addplot table {"../lognxy/bdratiosr3.ans"};
+    \addplot table {"../lognxy/naiveratiosr3.ans"};
+    \addplot table {"../lognxy/bdplusratiosr3.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}
+
+  
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}|=0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../randxy/fdratiolr5.ans"};
+    \addplot table {"../randxy/bdratiolr5.ans"};
+    \addplot table {"../randxy/naiveratiolr5.ans"};
+    \addplot table {"../randxy/bdplusratiolr5.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}\hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}|=0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../randxy/fdratiosr5.ans"};
+    \addplot table {"../randxy/bdratiosr5.ans"};
+    \addplot table {"../randxy/naiveratiosr5.ans"};
+    \addplot table {"../randxy/bdplusratiosr5.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}\hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}|=0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n) - 3$},
+      cycle list name = mycolorlist,
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../lognxy/fdratiolr5.ans"};
+    \addplot table {"../lognxy/bdratiolr5.ans"};
+    \addplot table {"../lognxy/naiveratiolr5.ans"};
+    \addplot table {"../lognxy/bdplusratiolr5.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture} \hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 2.5n$; $|\mathbf{R}|=0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../lognxy/fdratiosr5.ans"};
+    \addplot table {"../lognxy/bdratiosr5.ans"};
+    \addplot table {"../lognxy/naiveratiosr5.ans"};
+    \addplot table {"../lognxy/bdplusratiosr5.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}
+  
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}|=0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../randxy/fdratiolr10.ans"};
+    \addplot table {"../randxy/bdratiolr10.ans"};
+    \addplot table {"../randxy/naiveratiolr10.ans"};
+    \addplot table {"../randxy/bdplusratiolr10.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}\hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}|=0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| \in_{\mathrm{rand}} [1,3]$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../randxy/fdratiosr10.ans"};
+    \addplot table {"../randxy/bdratiosr10.ans"};
+    \addplot table {"../randxy/naiveratiosr10.ans"};
+    \addplot table {"../randxy/bdplusratiosr10.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}\hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      title = {$|\mathbf{E}| = 5n$; $|\mathbf{R}|=0.5n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n) - 3$},
+      cycle list name = mycolorlist,
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../lognxy/fdratiolr10.ans"};
+    \addplot table {"../lognxy/bdratiolr10.ans"};
+    \addplot table {"../lognxy/naiveratiolr10.ans"};
+    \addplot table {"../lognxy/bdplusratiolr10.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture} \hspace*{0.8cm}
+  \begin{tikzpicture}[scale=0.8]
+    \begin{semilogxaxis}[
+      width=9cm,
+      nice,
+      style = {line width=1.1pt},
+      xlabel={Number of Variables},
+      ylabel={Ratio of identified instances},
+      cycle list name = mycolorlist,
+      title = {$|\mathbf{E}| = 1.5n$; $|\mathbf{R}|=0.25n$;
+      $|\mathbf{X}|, |\mathbf{Y}| = \log_2(n)-3$},
+      log basis x={2}, 
+      legend entries = {\textsc{fd}, \textsc{bd},
+      \textsc{fdzero}, \textsc{bdplus}},
+      legend style = {at={(1,0)}, anchor = {south east}},
+      ]
+    \addplot table {"../lognxy/fdratiosr10.ans"};
+    \addplot table {"../lognxy/bdratiosr10.ans"};
+    \addplot table {"../lognxy/naiveratiosr10.ans"};
+    \addplot table {"../lognxy/bdplusratiosr10.ans"};
+    \end{semilogxaxis}
+  \end{tikzpicture}
+\end{document}
