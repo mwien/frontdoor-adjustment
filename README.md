@@ -1,6 +1,6 @@
 # Linear-Time Algorithms for Front-Door Adjustment in Causal Graphs
 
-This repository is the official implementation of [Linear-Time Algorithms for Front-Door Adjustment in Causal Graphs](https://arxiv.org/abs/2211.16468). This directory contains the code to replicate the experimental results discussed in the paper.
+This repository is the official implementation of [Linear-Time Algorithms for Front-Door Adjustment in Causal Graphs](https://arxiv.org/abs/2211.16468). In particular, it contains the code to replicate the experimental results discussed in the paper.
 
 As we compare algorithms in Julia, Python (ours and the ones given by Jeong et al.) and JavaScript, quite a few things have to be set up. This directory, however, should contain everything necessary except for:
 - A Julia installation with dependencies specified below.
