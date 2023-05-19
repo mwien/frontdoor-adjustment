@@ -4,7 +4,7 @@ This repository is the official implementation of [Linear-Time Algorithms for Fr
 
 If you are mainly interested in the implementations of our linear-time algorithms (Alg. 2 and 3 of the paper), the ones in Python and Julia are given in ```frontdoor.py```, ```minimal.py``` as well as ```frontdoor.jl```, ```minimal.jl``` (the JavaScript implementations are directly integrated with Dagitty under ```external/dagitty```).
 
-As we compare algorithms in Julia, Python (ours and the ones given by [Jeong et al.](https://arxiv.org/abs/2210.05816)) and JavaScript, quite a few things have to be set up in order to run the experiments. This directory, however, should contain everything necessary except for:
+As we compare implementations in Julia, Python (ours and the ones given by [Jeong et al.](https://arxiv.org/abs/2210.05816)) and JavaScript, quite a few things have to be set up in order to run the experiments. This directory, however, should contain everything necessary except for:
 - A Julia installation with dependencies specified below.
 - A Python 3 installation with dependencies specified below.
 - A Node.js and npm installation with dependencies specified below.
