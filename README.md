@@ -2,7 +2,9 @@
 
 This repository is the official implementation of [Linear-Time Algorithms for Front-Door Adjustment in Causal Graphs](https://arxiv.org/abs/2211.16468). In particular, it contains the code to replicate the experimental results discussed in the paper.
 
-If you are mainly interested in the implementations of our linear-time algorithms (Alg. 2 and 3 of the paper), the ones in Python and Julia are given in ```frontdoor.py```, ```minimal.py``` as well as ```frontdoor.jl```, ```minimal.jl``` (the JavaScript implementations are directly integrated with Dagitty under ```external/dagitty```).
+If you are mainly interested in the implementations of our linear-time algorithms (Alg. 2 and 3 of the paper), the ones in Python and Julia are given in ```frontdoor.py```, ```minimal.py``` as well as ```frontdoor.jl```, ```minimal.jl``` (the JavaScript implementations are directly integrated with DAGitty under ```external/dagitty```, however using [DAGitty](https://www.dagitty.net/) directly might be easier).
+
+The Julia implementations (and many additional functionalities) are also available via the package [CausalInference.jl](https://github.com/mschauer/CausalInference.jl). Anyone interested in integrating the Python implementations into one of the Causality packages, feel free to contact me.
 
 As we compare implementations in Julia, Python (ours and the ones given by [Jeong et al.](https://arxiv.org/abs/2210.05816)) and JavaScript, quite a few things have to be set up in order to run the experiments. This directory, however, should contain everything necessary except for:
 - A Julia installation with dependencies specified below.
